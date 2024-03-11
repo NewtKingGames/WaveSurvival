@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cswjfqqc7xkl2"]
+[gd_scene load_steps=16 format=3 uid="uid://cswjfqqc7xkl2"]
 
 [ext_resource type="Texture2D" uid="uid://bqgnqnbexvmmx" path="res://post-apoc-tds/background.png" id="1_nv0cc"]
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_tufta"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cby3ly35duw6" path="res://post-apoc-tds/player_walk2.png" id="9_dj8wa"]
 [ext_resource type="Texture2D" uid="uid://bir5ycg37u6i5" path="res://post-apoc-tds/player_walk3.png" id="10_u7jaj"]
 [ext_resource type="Texture2D" uid="uid://be4meq8qfvb5u" path="res://post-apoc-tds/player_walk4.png" id="11_idiby"]
+[ext_resource type="PackedScene" uid="uid://bnjuid15mggmr" path="res://scenes/enemies/roach.tscn" id="14_kfcy6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_83kkk"]
 resource_local_to_scene = true
@@ -75,7 +76,7 @@ region_enabled = true
 region_rect = Rect2(-2001.52, -913.138, 4621.56, 2175.97)
 
 [node name="Player" parent="." instance=ExtResource("2_wlp7f")]
-position = Vector2(573, 320)
+position = Vector2(960, 545)
 
 [node name="CharacterAnimatedSprite2D" parent="Player" index="1"]
 sprite_frames = SubResource("SpriteFrames_83kkk")
@@ -94,6 +95,13 @@ position = Vector2(787, 334)
 scale = Vector2(5.7944, 5.7944)
 
 [node name="Bullets" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Roach" parent="Enemies" instance=ExtResource("14_kfcy6")]
+position = Vector2(352, 704)
+
+[node name="Gore" type="Node2D" parent="."]
 
 [connection signal="laser_shot" from="Player/Gun" to="." method="_on_gun_laser_shot"]
 

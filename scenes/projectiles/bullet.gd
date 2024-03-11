@@ -4,11 +4,12 @@ extends Area2D
 @export var direction: Vector2 = Vector2.UP
 
 func _process(delta):
-	print("PROCESS")
-	position += direction * speed * delta
+	#position += direction * speed * delta
 	if $RayCast2D.is_colliding():
 		# Get the first object we intersected with
 		var object = $RayCast2D.get_collider()
+		#print("collided with object")
+		#print(object)/
 		#$Line2D.add_point(object.position - object.global_position)
 		#$Line2D.add_point(object.position)
 		if "hit" in object:

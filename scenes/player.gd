@@ -5,7 +5,7 @@ var is_aiming: bool = false
 var player_aim_walk_speed: int = 100
 var player_sprint_speed: int = 600
 
-func _process(delta):
+func _process(_delta):
 	# TODO Medium refactor of these nasty booleans
 	# Eventually look up animated trees and state machines to see how you can handle this nicer
 	# Eventually cleanup the sprites themselves to put the player in a consistent posistion
@@ -25,8 +25,8 @@ func _process(delta):
 	velocity = direction * current_speed
 	if direction:
 		if is_aiming:
-			# Play aim walking animation
-			print("aim walk")
+			# TODOww Play aim walking animation
+			pass
 		else:
 			# Play walking animation
 			$CharacterAnimatedSprite2D.play("walk")
@@ -34,3 +34,5 @@ func _process(delta):
 		$CharacterAnimatedSprite2D.play("default")
 	move_and_slide()
 	look_at(get_global_mouse_position())
+	# Set global player position
+	Globals.player_position = position

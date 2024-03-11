@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnjuid15mggmr"]
+
+[ext_resource type="PackedScene" uid="uid://b2ebicw4hfqod" path="res://scenes/enemies/enemy.tscn" id="1_oeto1"]
+[ext_resource type="Script" path="res://scenes/enemies/roach.gd" id="2_hbylx"]
+[ext_resource type="Texture2D" uid="uid://cvnij3ab363ni" path="res://future-tds/roach_idle.png" id="3_sg41w"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l0g7x"]
+radius = 13.5
+
+[node name="Roach" instance=ExtResource("1_oeto1")]
+collision_layer = 4
+script = ExtResource("2_hbylx")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-11, 5.96046e-08)
+rotation = -1.5708
+scale = Vector2(5, 5)
+texture = ExtResource("3_sg41w")
+
+[node name="CollisionShape2D" parent="." index="1"]
+scale = Vector2(2.3192, 2.3192)
+shape = SubResource("CapsuleShape2D_l0g7x")

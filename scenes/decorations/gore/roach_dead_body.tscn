@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ihwb7riyh3o1"]
+
+[ext_resource type="Texture2D" uid="uid://dx4jeh2nd7xp7" path="res://future-tds/roach_death_1_4.png" id="1_2ogxs"]
+
+[node name="RoachDeadBody" type="Sprite2D"]
+scale = Vector2(5, 5)
+texture = ExtResource("1_2ogxs")
