@@ -1,0 +1,100 @@
+[gd_scene load_steps=15 format=3 uid="uid://cswjfqqc7xkl2"]
+
+[ext_resource type="Texture2D" uid="uid://bqgnqnbexvmmx" path="res://post-apoc-tds/background.png" id="1_nv0cc"]
+[ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_tufta"]
+[ext_resource type="PackedScene" uid="uid://e1q7h8ahbcfq" path="res://scenes/player.tscn" id="2_wlp7f"]
+[ext_resource type="Texture2D" uid="uid://e5rbemx88ajc" path="res://post-apoc-tds/player_ready1.png" id="3_as3x2"]
+[ext_resource type="PackedScene" uid="uid://d3a8p78snhh18" path="res://barrel.tscn" id="3_b2d1n"]
+[ext_resource type="Texture2D" uid="uid://bdeq2s3u4o18i" path="res://post-apoc-tds/player_ready2.png" id="4_br0oi"]
+[ext_resource type="Texture2D" uid="uid://xyvlmxatvfmy" path="res://post-apoc-tds/player_ready3.png" id="5_aem31"]
+[ext_resource type="Texture2D" uid="uid://b6rhflej60qig" path="res://post-apoc-tds/player_ready4.png" id="6_eucuk"]
+[ext_resource type="Texture2D" uid="uid://lvdxbgnkp3iu" path="res://post-apoc-tds/player_body.png" id="7_rdngp"]
+[ext_resource type="Texture2D" uid="uid://dc5agc0hn3g2e" path="res://post-apoc-tds/player_walk1.png" id="8_olmyk"]
+[ext_resource type="Texture2D" uid="uid://cby3ly35duw6" path="res://post-apoc-tds/player_walk2.png" id="9_dj8wa"]
+[ext_resource type="Texture2D" uid="uid://bir5ycg37u6i5" path="res://post-apoc-tds/player_walk3.png" id="10_u7jaj"]
+[ext_resource type="Texture2D" uid="uid://be4meq8qfvb5u" path="res://post-apoc-tds/player_walk4.png" id="11_idiby"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_83kkk"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_as3x2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_br0oi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aem31")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_eucuk")
+}],
+"loop": false,
+"name": &"aim",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_rdngp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_olmyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_dj8wa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_u7jaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_idiby")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_tufta")
+
+[node name="Ground" type="Node2D" parent="."]
+
+[node name="TileMap" type="TileMap" parent="Ground"]
+format = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+texture_repeat = 2
+texture = ExtResource("1_nv0cc")
+region_enabled = true
+region_rect = Rect2(-2001.52, -913.138, 4621.56, 2175.97)
+
+[node name="Player" parent="." instance=ExtResource("2_wlp7f")]
+position = Vector2(573, 320)
+
+[node name="CharacterAnimatedSprite2D" parent="Player" index="1"]
+sprite_frames = SubResource("SpriteFrames_83kkk")
+frame = 0
+frame_progress = 0.0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+energy = 0.25
+blend_mode = 1
+
+[node name="Barrel" parent="." instance=ExtResource("3_b2d1n")]
+position = Vector2(787, 334)
+scale = Vector2(5.7944, 5.7944)
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[connection signal="laser_shot" from="Player/Gun" to="." method="_on_gun_laser_shot"]
+
+[editable path="Player"]
