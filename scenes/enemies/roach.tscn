@@ -10,6 +10,7 @@ radius = 13.5
 [node name="Roach" instance=ExtResource("1_oeto1")]
 collision_layer = 4
 script = ExtResource("2_hbylx")
+speed = 100
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(-11, 5.96046e-08)

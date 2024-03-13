@@ -15,5 +15,6 @@ script = ExtResource("1_euaty")
 
 [node name="InvulnerableTimer" type="Timer" parent="Timers"]
 wait_time = 0.1
+one_shot = true
 
 [connection signal="timeout" from="Timers/InvulnerableTimer" to="." method="_on_timer_timeout"]

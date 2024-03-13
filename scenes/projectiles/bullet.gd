@@ -24,7 +24,6 @@ func _process(delta):
 
 # Hit either an enemy or structure
 func _on_body_entered(body):
-	print("Hit")
 	print(body)
 
 
