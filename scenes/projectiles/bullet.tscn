@@ -16,7 +16,7 @@ shape = SubResource("CapsuleShape2D_kj2s0")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 rotation = -1.5708
-scale = Vector2(5, 100)
+scale = Vector2(10, 100)
 collision_mask = 6
 
 [node name="BulletLifetime" type="Timer" parent="."]
@@ -27,7 +27,7 @@ autostart = true
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(0, 0, 2, 0)
 width = 1.0
-default_color = Color(0.988235, 0.945098, 0, 1)
+default_color = Color(0.988235, 0.572549, 0, 0.858824)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="BulletLifetime" to="." method="_on_bullet_lifetime_timeout"]

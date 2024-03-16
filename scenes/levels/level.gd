@@ -12,10 +12,8 @@ var spitter_enemy: PackedScene = preload("res://scenes/enemies/spitter_bug.tscn"
 
 # Enemy spawn variables @onready is needed to initialize them
 @onready var spawn_points: Array = [$EnemySpawnPoints/NorthSpawn, $EnemySpawnPoints/EastSpawn, $EnemySpawnPoints/SouthSpawn, $EnemySpawnPoints/WestSpawn]
-var spawn_roaches: int = 1
-var spawn_spitters: int = 1
-
-
+var spawn_roaches: int = 3
+var spawn_spitters: int = 3
 
 # Notes on enemy spawn system
 # 1. We need to have some initial spawning of enemies 
@@ -32,27 +30,32 @@ func _ready():
 	print(spawn_points)
 	connect_enemy_signals()
 	spawn_enemies()
-	#Spawn enemeies
-
-
+	# Connect the nested player gun bullet shot
+	$Player/Gun.connect("bullet_shot", _on_gun_bullet_shot)
 
 func spawn_enemies():
 	print("Spawning wave")
 	# Instantiate enemies
+	# TODO Enemies don't move around eachother smoothly, will want some kind of pathfinding or basic method where they avoid eachother
 	for n in spawn_roaches:
-		print("Spawning roach")
 		var selected_spawn: Marker2D = pick_random_spawn()
 		var spawned_roach = roach_enemy.instantiate() as CharacterBody2D
-		spawned_roach.position = selected_spawn.global_position
+		spawned_roach.position = generate_spawn_position(selected_spawn)
 		$Enemies.add_child(spawned_roach)
 	for n in spawn_spitters:
-		print("spawning spitters")
 		var selected_spawn: Marker2D = pick_random_spawn()
 		var spawned_spitter = spitter_enemy.instantiate() as CharacterBody2D
-		spawned_spitter.position = selected_spawn.global_position
+		spawned_spitter.position = generate_spawn_position(selected_spawn)
 		$Enemies.add_child(spawned_spitter)
 	# Connect enemy signals - TODO optimzation could be done to connect them as we spawn them
 	connect_enemy_signals()
+	
+func generate_spawn_position(point: Marker2D) -> Vector2:
+	# Return a point within a 100 px radius of the marker 2D
+	var x_variance: float = randf_range(-100, 100)
+	var y_variance: float = randf_range(-100, 100)
+	var vector_variance = Vector2(x_variance, y_variance)
+	return point.position + vector_variance
 
 func pick_random_spawn() -> Marker2D:
 	return spawn_points.pick_random()

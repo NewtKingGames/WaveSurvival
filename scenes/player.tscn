@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://e1q7h8ahbcfq"]
+[gd_scene load_steps=21 format=3 uid="uid://e1q7h8ahbcfq"]
 
 [ext_resource type="Texture2D" uid="uid://lvdxbgnkp3iu" path="res://post-apoc-tds/player_body.png" id="1_ky6tw"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_n7ucp"]
@@ -7,11 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://xyvlmxatvfmy" path="res://post-apoc-tds/player_ready3.png" id="5_ancye"]
 [ext_resource type="Texture2D" uid="uid://b6rhflej60qig" path="res://post-apoc-tds/player_ready4.png" id="6_qi4ow"]
 [ext_resource type="Texture2D" uid="uid://dc5agc0hn3g2e" path="res://post-apoc-tds/player_walk1.png" id="7_tok2l"]
+[ext_resource type="Texture2D" uid="uid://dikg5vk302vt6" path="res://post-apoc-tds/player_attack1.png" id="7_ws1oi"]
+[ext_resource type="Texture2D" uid="uid://b5g31jjhfhx5v" path="res://post-apoc-tds/player_attack2.png" id="8_7phi0"]
 [ext_resource type="Texture2D" uid="uid://cby3ly35duw6" path="res://post-apoc-tds/player_walk2.png" id="8_vx4jm"]
 [ext_resource type="Texture2D" uid="uid://bir5ycg37u6i5" path="res://post-apoc-tds/player_walk3.png" id="9_2q5x4"]
+[ext_resource type="Texture2D" uid="uid://dxsch1oysshe0" path="res://post-apoc-tds/player_walkready1.png" id="9_yjx6f"]
 [ext_resource type="Texture2D" uid="uid://be4meq8qfvb5u" path="res://post-apoc-tds/player_walk4.png" id="10_2bg4e"]
+[ext_resource type="Texture2D" uid="uid://dh364eaypdh83" path="res://post-apoc-tds/player_walkready2.png" id="10_us48q"]
+[ext_resource type="Texture2D" uid="uid://bpb37ms4xel68" path="res://post-apoc-tds/player_walkready3.png" id="11_0cr8j"]
 [ext_resource type="Script" path="res://scenes/Gun.gd" id="11_k7icv"]
 [ext_resource type="Texture2D" uid="uid://nyg5vl80c8md" path="res://future-tds/light.png" id="12_j70h4"]
+[ext_resource type="Texture2D" uid="uid://cx3tif05hh08n" path="res://post-apoc-tds/player_walkready4.png" id="12_r1ctv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x4nw2"]
 radius = 8.72065
@@ -38,11 +44,42 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("9_yjx6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_us48q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_0cr8j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_r1ctv")
+}],
+"loop": true,
+"name": &"aim_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_ky6tw")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_ws1oi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7phi0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qi4ow")
+}],
+"loop": false,
+"name": &"fire",
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -75,9 +112,8 @@ shape = SubResource("CircleShape2D_x4nw2")
 rotation = 1.5708
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_eer7d")
-animation = &"aim"
-frame = 3
-frame_progress = 1.0
+animation = &"aim_walk"
+frame_progress = 0.714188
 
 [node name="Gun" type="Node2D" parent="."]
 position = Vector2(46, 19)

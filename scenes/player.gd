@@ -11,6 +11,7 @@ func _process(_delta):
 	# Eventually cleanup the sprite images themselves to put the player in a consistent posistion
 	# Grab the direction first so we can use it in the else block and the movement section
 	var direction = Input.get_vector("left", "right", "up", "down")
+	#$CharacterAnimatedSprite2D.play("shoot")
 	if Input.is_action_pressed("aim"):
 		look_at(get_global_mouse_position())
 		if not is_aiming:
@@ -18,8 +19,10 @@ func _process(_delta):
 		is_aiming = true
 		# TODO could have the player "frozen" until they have finished aiming and then they can move
 		if Input.is_action_just_pressed("shoot"):
+			print("Shoot")
 			var aim_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
 			$Gun.shoot(aim_direction)
+			$CharacterAnimatedSprite2D.play("fire")
 	else:
 		# TODO could play a nice reverse aim animation
 		# If we are not aiming face the player in the direction we are moving
@@ -31,8 +34,8 @@ func _process(_delta):
 	velocity = direction * current_speed
 	if direction:
 		if is_aiming:
-			# TODO Play aim walking animation
-			pass
+			# TODO reconcile this with shooting, right now you can aim and shoot and the animation won't play
+			$CharacterAnimatedSprite2D.play("aim_walk")
 		else:
 			# Play walking animation
 			$CharacterAnimatedSprite2D.play("walk")
