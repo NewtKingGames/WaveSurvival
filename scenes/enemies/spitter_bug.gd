@@ -4,6 +4,7 @@ signal bug_spat(pos, direction)
 
 @export var speed: int = 100
 var is_attacking: bool = false
+var health: int = 100
 
 func _process(delta):
 	look_at(Globals.player_position)
@@ -30,3 +31,11 @@ func _on_animated_sprite_2d_animation_finished():
 		#Emit a signal to the level script to generate bug spit
 		var bullet_direction = (Globals.player_position - global_position).normalized()
 		bug_spat.emit($SpitSpawn.global_position, bullet_direction)
+
+func hit():
+	if vulnerable: 
+		$Timers/InvulnerableTimer.start()
+		vulnerable = false
+		health -= 10
+	if health <= 0:
+		queue_free()
