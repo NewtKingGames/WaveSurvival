@@ -7,25 +7,31 @@ var player_sprint_speed: int = 600
 
 func _process(_delta):
 	# TODO Medium refactor of these nasty booleans
-	# Eventually look up animated trees and state machines to see how you can handle this nicer
-	# Eventually cleanup the sprites themselves to put the player in a consistent posistion
+	# TODO look up animated trees and state machines to see how you can handle this nicer
+	# Eventually cleanup the sprite images themselves to put the player in a consistent posistion
+	# Grab the direction first so we can use it in the else block and the movement section
+	var direction = Input.get_vector("left", "right", "up", "down")
 	if Input.is_action_pressed("aim"):
+		look_at(get_global_mouse_position())
 		if not is_aiming:
 			$CharacterAnimatedSprite2D.play("aim")
 		is_aiming = true
 		# TODO could have the player "frozen" until they have finished aiming and then they can move
 		if Input.is_action_just_pressed("shoot"):
-			var direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
-			$Gun.shoot(direction)
+			var aim_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
+			$Gun.shoot(aim_direction)
 	else:
 		# TODO could play a nice reverse aim animation
+		# If we are not aiming face the player in the direction we are moving
 		is_aiming = false
-	var direction = Input.get_vector("left", "right", "up", "down")
+		if direction != Vector2.ZERO:
+			look_at(direction + position)
+	# Calculate player velocity
 	var current_speed = player_aim_walk_speed if is_aiming else player_walk_speed
 	velocity = direction * current_speed
 	if direction:
 		if is_aiming:
-			# TODOww Play aim walking animation
+			# TODO Play aim walking animation
 			pass
 		else:
 			# Play walking animation
@@ -33,6 +39,5 @@ func _process(_delta):
 	elif not is_aiming:
 		$CharacterAnimatedSprite2D.play("default")
 	move_and_slide()
-	look_at(get_global_mouse_position())
 	# Set global player position
 	Globals.player_position = position
