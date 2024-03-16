@@ -11,5 +11,4 @@ func _process(delta):
 	pass
 	
 func hit():
-	print("Hit!!")
 	queue_free()

@@ -79,7 +79,7 @@ frame = 3
 frame_progress = 1.0
 
 [node name="Gun" type="Node2D" parent="."]
-position = Vector2(46, 2.27374e-13)
+position = Vector2(46, 19)
 scale = Vector2(16.5825, 7.27773)
 script = ExtResource("11_k7icv")
 

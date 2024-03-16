@@ -4,20 +4,18 @@ extends Area2D
 @export var direction: Vector2 = Vector2.UP
 
 func _process(delta):
-	#position += direction * speed * delta
+	#TODO use tweens to make this look nice?
+	#TODO could make it look like it travels like a bullet?
 	if $RayCast2D.is_colliding():
 		# Get the first object we intersected with
 		var object = $RayCast2D.get_collider()
-		#print("collided with object")
-		#print(object)/
-		#$Line2D.add_point(object.position - object.global_position)
-		#$Line2D.add_point(object.position)
+		# The line requires local scene coordinates, convert the collision point to local scene
+		$Line2D.add_point(to_local($RayCast2D.get_collision_point()))
 		if "hit" in object:
 			object.hit()
-			# TODO add a bulllet line here
 			# TODO add particle effects?
-			#queue_free()
-	#print($RayCast2D.is_colliding())a
+	else:
+		$Line2D.add_point(Vector2.RIGHT*100000)
 
 
 

@@ -19,7 +19,6 @@ func reload():
 	print("reloading")
 
 func shoot(direction: Vector2):
-	print("shooting!")
 	bullet_shot.emit(global_position, direction)
 	# Old raycast solution that I'm not going to use anymore
 	#var space_state = get_world_2d().direct_space_state
