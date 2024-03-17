@@ -22,7 +22,6 @@ func _process(_delta):
 			print("Shoot")
 			var aim_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
 			$Gun.shoot(aim_direction)
-			$CharacterAnimatedSprite2D.play("fire")
 	else:
 		# TODO could play a nice reverse aim animation
 		# If we are not aiming face the player in the direction we are moving
@@ -32,7 +31,7 @@ func _process(_delta):
 	# Calculate player velocity
 	var current_speed = player_aim_walk_speed if is_aiming else player_walk_speed
 	velocity = direction * current_speed
-	if direction:
+	if direction != Vector2.ZERO:
 		if is_aiming:
 			# TODO reconcile this with shooting, right now you can aim and shoot and the animation won't play
 			$CharacterAnimatedSprite2D.play("aim_walk")

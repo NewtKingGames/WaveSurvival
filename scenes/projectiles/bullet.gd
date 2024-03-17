@@ -5,6 +5,7 @@ extends Area2D
 var has_hit: bool = false
 
 func _process(delta):
+	pass
 	print("bullet shoting")
 	if has_hit:
 		return
@@ -31,8 +32,9 @@ func _process(delta):
 
 
 # Hit either an enemy or structure
+# TODO delete this
 func _on_body_entered(body):
-	print(body)
+	pass
 
 
 ## Delete the bullet if we hit nothing

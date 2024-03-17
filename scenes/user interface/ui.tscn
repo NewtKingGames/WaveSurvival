@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://ie137mrc84r7"]
+
+[ext_resource type="Texture2D" uid="uid://cr5ievr1ojy5j" path="res://future-tds/hud/hud_shotgun.png" id="1_ujj2p"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="WeaponDisplay" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.01
+anchor_top = 0.92
+anchor_right = 0.01
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WeaponDisplay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="WeaponDisplay/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_ujj2p")

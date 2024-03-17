@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://e1q7h8ahbcfq"]
+[gd_scene load_steps=22 format=3 uid="uid://e1q7h8ahbcfq"]
 
 [ext_resource type="Texture2D" uid="uid://lvdxbgnkp3iu" path="res://post-apoc-tds/player_body.png" id="1_ky6tw"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_n7ucp"]
@@ -16,8 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://dh364eaypdh83" path="res://post-apoc-tds/player_walkready2.png" id="10_us48q"]
 [ext_resource type="Texture2D" uid="uid://bpb37ms4xel68" path="res://post-apoc-tds/player_walkready3.png" id="11_0cr8j"]
 [ext_resource type="Script" path="res://scenes/Gun.gd" id="11_k7icv"]
-[ext_resource type="Texture2D" uid="uid://nyg5vl80c8md" path="res://future-tds/light.png" id="12_j70h4"]
 [ext_resource type="Texture2D" uid="uid://cx3tif05hh08n" path="res://post-apoc-tds/player_walkready4.png" id="12_r1ctv"]
+[ext_resource type="Texture2D" uid="uid://cpcmwklog1ihg" path="res://Light.png" id="18_uwdoe"]
+[ext_resource type="AudioStream" uid="uid://bfrjggfb760hd" path="res://audio/lmg_fire01.mp3" id="19_rvta8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x4nw2"]
 radius = 8.72065
@@ -112,8 +113,7 @@ shape = SubResource("CircleShape2D_x4nw2")
 rotation = 1.5708
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_eer7d")
-animation = &"aim_walk"
-frame_progress = 0.714188
+animation = &"aim"
 
 [node name="Gun" type="Node2D" parent="."]
 position = Vector2(46, 19)
@@ -121,6 +121,16 @@ scale = Vector2(16.5825, 7.27773)
 script = ExtResource("11_k7icv")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(1604, -5)
+scale = Vector2(3.76, 0.919999)
+color = Color(1, 0.992157, 0.654902, 1)
 energy = 0.5
-texture = ExtResource("12_j70h4")
-texture_scale = 2.35
+shadow_enabled = true
+shadow_item_cull_mask = 47
+texture = ExtResource("18_uwdoe")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="GunShotSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("19_rvta8")
