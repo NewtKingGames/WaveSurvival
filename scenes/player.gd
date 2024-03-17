@@ -43,3 +43,6 @@ func _process(_delta):
 	move_and_slide()
 	# Set global player position
 	Globals.player_position = position
+
+func hit():
+	Globals.player_health -= 10

@@ -119,10 +119,6 @@ visible = false
 energy = 0.6
 blend_mode = 1
 
-[node name="Barrel" parent="." instance=ExtResource("3_b2d1n")]
-position = Vector2(787, 334)
-scale = Vector2(5.7944, 5.7944)
-
 [node name="Bullets" type="Node2D" parent="."]
 
 [node name="EnemySpawnPoints" type="Node2D" parent="."]
@@ -146,3 +142,6 @@ position = Vector2(964, 536)
 position_smoothing_enabled = true
 
 [node name="UI" parent="." instance=ExtResource("6_851dc")]
+
+[node name="Barrel" parent="." instance=ExtResource("3_b2d1n")]
+position = Vector2(268, 244)

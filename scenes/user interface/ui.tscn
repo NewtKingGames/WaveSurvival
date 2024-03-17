@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://ie137mrc84r7"]
+[gd_scene load_steps=3 format=3 uid="uid://ie137mrc84r7"]
 
-[ext_resource type="Texture2D" uid="uid://cr5ievr1ojy5j" path="res://future-tds/hud/hud_shotgun.png" id="1_ujj2p"]
+[ext_resource type="Script" path="res://scenes/user interface/ui.gd" id="1_bryd1"]
+[ext_resource type="Texture2D" uid="uid://br2x5prsi6u3e" path="res://future-tds/hud/hud_pistol.png" id="1_h4r2q"]
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("1_bryd1")
 
 [node name="WeaponDisplay" type="Control" parent="."]
 layout_mode = 3
@@ -20,6 +22,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="TextureRect" type="TextureRect" parent="WeaponDisplay/VBoxContainer"]
+[node name="GunDiisplay" type="TextureRect" parent="WeaponDisplay/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("1_ujj2p")
+texture = ExtResource("1_h4r2q")

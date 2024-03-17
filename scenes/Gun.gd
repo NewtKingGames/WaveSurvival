@@ -5,8 +5,6 @@ signal bullet_shot(pos, direction)
 
 var shotgun_ammo: int = 12
 
-var active_gun: String = "pistol"
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -15,10 +13,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("switch_gun_pistol"):
-		active_gun = "pistol"
-		print("pistol!!!!")
+		Globals.equipped_weapon = "pistol"
 	if Input.is_action_just_pressed("switch_gun_shotgun"):
-		active_gun = "shotgun"
+		Globals.equipped_weapon = "shotgun"
 	
 # TODO - see if you even want to implement reloading
 func reload():
@@ -26,11 +23,11 @@ func reload():
 
 
 func shoot(direction: Vector2):
-	if active_gun == "pistol":
+	if Globals.equipped_weapon == "pistol":
 		bullet_shot.emit(global_position, direction)
 		$"../CharacterAnimatedSprite2D".play("fire")
 		$"../Sounds/GunShotSound".play()
-	if active_gun == "shotgun":
+	if Globals.equipped_weapon == "shotgun":
 		print("shotgun shot")
 		if shotgun_ammo > 0:
 			shotgun_ammo -= 1

@@ -11,4 +11,4 @@ func _process(delta):
 	pass
 	
 func hit():
-	queue_free()
+	$AnimationPlayer.play("Explosion")
