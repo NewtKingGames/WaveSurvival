@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://l3b54btjocd4"]
+
+[ext_resource type="Texture2D" uid="uid://dh15pkmk2vv5d" path="res://post-apoc-tds/car1.png" id="1_qkj7o"]
+[ext_resource type="PackedScene" uid="uid://dqvefgunysqwb" path="res://scenes/decorations/structures/car_base.tscn" id="1_uhhha"]
+
+[node name="Car1" instance=ExtResource("1_uhhha")]
+
+[node name="Sprite2D" parent="." index="0"]
+scale = Vector2(3.94593, 3.97301)
+texture = ExtResource("1_qkj7o")

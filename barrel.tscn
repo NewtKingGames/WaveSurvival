@@ -53,10 +53,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.01, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("7_4yq1k"), ExtResource("6_ybcys"), ExtResource("5_xogkf"), ExtResource("4_xa48l"), ExtResource("4_xa48l"), ExtResource("1_h1q33")]
+"values": [ExtResource("1_h1q33"), ExtResource("7_4yq1k"), ExtResource("6_ybcys"), ExtResource("5_xogkf"), ExtResource("4_xa48l"), ExtResource("4_xa48l"), ExtResource("1_h1q33")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -99,7 +99,7 @@ script = ExtResource("1_xibnl")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(6, 7)
 scale = Vector2(4, 4)
-texture = ExtResource("7_4yq1k")
+texture = ExtResource("1_h1q33")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
