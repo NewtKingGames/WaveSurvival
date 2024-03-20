@@ -1,44 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://d3a8p78snhh18"]
+[gd_scene load_steps=11 format=3 uid="uid://d3a8p78snhh18"]
 
 [ext_resource type="Texture2D" uid="uid://biwtwgbdxow3v" path="res://future-tds/background/barrel.png" id="1_h1q33"]
 [ext_resource type="Script" path="res://barrel.gd" id="1_xibnl"]
-[ext_resource type="Texture2D" uid="uid://bkpvji2xcb8vo" path="res://future-tds/barrel_destroy_0000_Layer-1-copy-4.png" id="3_giiqr"]
 [ext_resource type="Texture2D" uid="uid://culgov0u33gqy" path="res://future-tds/barrel_destroy_0001_Layer-1-copy-3.png" id="4_xa48l"]
 [ext_resource type="Texture2D" uid="uid://dqr5fjfvh8a25" path="res://future-tds/barrel_destroy_0002_Layer-1-copy-2.png" id="5_xogkf"]
 [ext_resource type="Texture2D" uid="uid://ct8jjx7saoats" path="res://future-tds/barrel_destroy_0003_Layer-1-copy.png" id="6_ybcys"]
 [ext_resource type="Texture2D" uid="uid://i8nx4ynmxjee" path="res://future-tds/barrel_destroy_0004_Layer-1.png" id="7_4yq1k"]
 [ext_resource type="AudioStream" uid="uid://c3iiaw6gs2o44" path="res://audio/synthetic_explosion_1.mp3" id="8_8ju5x"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_sg8q8"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_h1q33")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_4yq1k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_ybcys")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_xogkf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_xa48l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_giiqr")
-}],
-"loop": false,
-"name": &"explosion",
-"speed": 10.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s8uby"]
 radius = 7.52736
@@ -78,13 +46,27 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "clips": [{
-"end_offset": 0.0,
+"end_offset": 0.61,
 "start_offset": 0.0,
 "stream": ExtResource("8_8ju5x")
 }],
 "times": PackedFloat32Array(0)
 }
 tracks/2/use_blend = true
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s06ai"]
 _data = {
@@ -101,15 +83,6 @@ position = Vector2(6, 7)
 scale = Vector2(4, 4)
 texture = ExtResource("1_h1q33")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(6, 7)
-scale = Vector2(4, 4)
-sprite_frames = SubResource("SpriteFrames_sg8q8")
-animation = &"explosion"
-frame = 4
-frame_progress = 1.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_s8uby")
@@ -120,4 +93,3 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_8ju5x")

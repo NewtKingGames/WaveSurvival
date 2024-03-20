@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+var has_hit: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,4 +12,6 @@ func _process(delta):
 	pass
 	
 func hit():
-	$AnimationPlayer.play("Explosion")
+	if not has_hit:
+		has_hit = true
+		$AnimationPlayer.play("Explosion")
