@@ -81,7 +81,7 @@ func _on_spitter_death(pos: Vector2, direction: Vector2):
 	print("spitter dead")
 
 func _on_gun_bullet_shot(pos, bullet_direction):
-	var bullet = bullet_scene.instantiate() as Area2D
+	var bullet = bullet_scene.instantiate()
 	bullet.position = pos
 	# Rotate the bullet
 	bullet.rotation = bullet_direction.angle()

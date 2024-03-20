@@ -1,20 +1,17 @@
-extends Area2D
+extends Node2D
 
 @export var speed: int = 20
 @export var direction: Vector2 = Vector2.UP
 var has_hit: bool = false
 
 func _process(delta):
-	pass
-	print("bullet shoting")
 	if has_hit:
 		return
+	#await get_tree().create_timer(100).timeout
 	# TODO use tweens to make this look nice?
 	# TODO could make it look like it travels like a bullet?
-	# TODO often the point is drawing to a way further point, multiple collisions? See comment on line 20
 	if $RayCast2D.is_colliding():
 		has_hit = true
-		print("is colliding")
 		# Get the first object we intersected with
 		var object = $RayCast2D.get_collider()
 		# The line requires local scene coordinates, convert the collision point to local scene
@@ -22,21 +19,15 @@ func _process(delta):
 		if "hit" in object:
 			object.hit()
 			# TODO add particle effects?
-	else:
-		has_hit = true
-		print("else block")
-		# It's because of this else block and it's probably due to this set of code running in process
-		$Line2D.add_point(Vector2.RIGHT*100000)
+	# I ran into a lot of issues with trying to render the bullet shooting off in the distance if we missed,
+	# but found the easiest solution was to just add objects with collisions way off in the distance beyond
+	#f the players view rather than trying to add this logic
+	#else:
+		#print("else block")
+		## It's because of this else block and it's probably due to this set of code running in process
+		#$Line2D.add_point(Vector2.RIGHT*100000)
+		##queue_free()
 
-
-
-
-# Hit either an enemy or structure
-# TODO delete this
-func _on_body_entered(body):
-	pass
-
-
-## Delete the bullet if we hit nothing
+## Delete the bullet after the timeout
 func _on_bullet_lifetime_timeout():
 	queue_free()
