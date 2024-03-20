@@ -1,10 +1,11 @@
 extends Enemy
 
 signal bug_spat(pos, direction)
+signal spitter_death(pos, direction)
 
 @export var speed: int = 100
 var is_attacking: bool = false
-var health: int = 100
+var health: int = 30
 
 func _process(delta):
 	look_at(Globals.player_position)
@@ -38,4 +39,10 @@ func hit():
 		vulnerable = false
 		health -= 10
 	if health <= 0:
+		var direction_on_death = (Globals.player_position - global_position).normalized()
+		# TODO possibly pass the whole object to the level function and let the level call queue_free?
+		# Right now the issue is our signal is triggered before the deletion of the enemy
+		# Alternatively we can just track how many enemies were spawned vs how many were killed and if they are equal we end the wave
+		# Pursuing that second option for now
+		spitter_death.emit(position, direction_on_death)
 		queue_free()

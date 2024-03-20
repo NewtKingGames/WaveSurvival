@@ -362,3 +362,11 @@ rotation = 2.32246
 [node name="Car5" parent="Decorations" instance=ExtResource("10_2a4td")]
 position = Vector2(-870, 1093)
 rotation = 0.775974
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="WaveSpawnDelay" type="Timer" parent="Timers"]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timers/WaveSpawnDelay" to="." method="_on_wave_spawn_delay_timeout"]
