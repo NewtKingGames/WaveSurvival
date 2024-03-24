@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cswjfqqc7xkl2"]
+[gd_scene load_steps=25 format=3 uid="uid://cswjfqqc7xkl2"]
 
 [ext_resource type="Texture2D" uid="uid://bqgnqnbexvmmx" path="res://post-apoc-tds/background.png" id="1_nv0cc"]
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_tufta"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://wiw00w1whqvn" path="res://post-apoc-tds/enemy_deathchest5exp.png" id="10_ffopa"]
 [ext_resource type="Texture2D" uid="uid://cx1ebpws6cs1m" path="res://post-apoc-tds/enemy_deathchest4.png" id="11_nyent"]
 [ext_resource type="Texture2D" uid="uid://dw3xlbq5rc6ou" path="res://post-apoc-tds/enemy_deathhead4.png" id="12_wled2"]
+[ext_resource type="Texture2D" uid="uid://nyg5vl80c8md" path="res://future-tds/light.png" id="19_yvipf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ln5ca"]
 texture = ExtResource("3_5ufh0")
@@ -311,7 +312,6 @@ texture = ExtResource("12_wled2")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
-visible = false
 energy = 0.6
 blend_mode = 1
 
@@ -344,29 +344,40 @@ position = Vector2(268, 244)
 
 [node name="Decorations" type="Node2D" parent="."]
 
-[node name="Car1" parent="Decorations" instance=ExtResource("7_ayta2")]
-position = Vector2(789, 330)
-rotation = 1.33774
-
-[node name="Car2" parent="Decorations" instance=ExtResource("7_ayta2")]
-position = Vector2(-231, 901)
-rotation = 1.69017
-
 [node name="Car3" parent="Decorations" instance=ExtResource("7_ayta2")]
-position = Vector2(976, 1260)
+position = Vector2(419, 1841)
+rotation = 1.34264
 
 [node name="Car4" parent="Decorations" instance=ExtResource("9_lhmkh")]
 position = Vector2(-761, 470)
 rotation = 2.32246
+scale = Vector2(1, 1)
 
 [node name="Car5" parent="Decorations" instance=ExtResource("10_2a4td")]
 position = Vector2(-870, 1093)
 rotation = 0.775974
+scale = Vector2(1, 1)
+
+[node name="Car6" parent="Decorations" instance=ExtResource("10_2a4td")]
+position = Vector2(922, 1511)
+rotation = 1.64762
+scale = Vector2(1, 1)
+
+[node name="Car1" parent="Decorations" instance=ExtResource("7_ayta2")]
+position = Vector2(709, 426)
 
 [node name="Timers" type="Node" parent="."]
 
 [node name="WaveSpawnDelay" type="Timer" parent="Timers"]
 wait_time = 5.0
 one_shot = true
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(-429, 2017)
+color = Color(0, 0.937255, 0.945098, 1)
+texture = ExtResource("19_yvipf")
+texture_scale = 3.0
 
 [connection signal="timeout" from="Timers/WaveSpawnDelay" to="." method="_on_wave_spawn_delay_timeout"]

@@ -3,6 +3,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgvhg"]
 
 [node name="CarBase" type="StaticBody2D"]
+scale = Vector2(1.2, 1.2)
 collision_layer = 4
 collision_mask = 23
 

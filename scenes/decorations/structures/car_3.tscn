@@ -6,4 +6,8 @@
 [node name="Car3" instance=ExtResource("1_mciwx")]
 
 [node name="Sprite2D" parent="." index="0"]
+scale = Vector2(1.03285, 1.03285)
 texture = ExtResource("2_oywgv")
+
+[node name="CollisionShape2D" parent="." index="1"]
+visible = false

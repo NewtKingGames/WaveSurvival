@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var player_walk_speed: int = 400
+var player_walk_speed: int = 300
 var is_aiming: bool = false
 var player_aim_walk_speed: int = 100
 var player_sprint_speed: int = 600
