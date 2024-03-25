@@ -9,6 +9,8 @@ radius = 13.5
 
 [node name="Roach" instance=ExtResource("1_oeto1")]
 collision_layer = 4
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("2_hbylx")
 speed = 100
 
@@ -21,3 +23,14 @@ texture = ExtResource("3_sg41w")
 [node name="CollisionShape2D" parent="." index="1"]
 scale = Vector2(2.3192, 2.3192)
 shape = SubResource("CapsuleShape2D_l0g7x")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="3"]
+avoidance_enabled = true
+radius = 100.0
+debug_enabled = true
+
+[node name="RecalculateTimer" type="Timer" parent="." index="4"]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="RecalculateTimer" to="." method="_on_recalculate_timer_timeout"]
