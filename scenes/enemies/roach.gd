@@ -15,8 +15,6 @@ func _physics_process(delta):
 	var next_path_pos = $NavigationAgent2D.get_next_path_position()
 	var direction: Vector2 = (next_path_pos - global_position).normalized()
 	velocity = direction * speed
-	
-	# Changing how we look at player since the skeleton faces up
 	look_at(Globals.player_position)
 	if not vulnerable:
 		## Very hacky way to push the enemies back

@@ -141,6 +141,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_etki8"]
 
 [node name="SpitterBug" instance=ExtResource("1_oeqje")]
+motion_mode = 1
 script = ExtResource("2_u4mn7")
 speed = 100
 
@@ -148,8 +149,7 @@ speed = 100
 rotation = 1.5708
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_lr4l8")
-animation = &"Walk"
-frame_progress = 0.304049
+animation = &"Attack"
 
 [node name="Sprite2D" parent="." index="1"]
 visible = false
@@ -172,6 +172,15 @@ debug_color = Color(0.929412, 0.203922, 0.0705882, 0.419608)
 [node name="SpitSpawn" type="Marker2D" parent="." index="5"]
 position = Vector2(61, 0)
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="6"]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="RecalculationTimer" type="Timer" parent="." index="7"]
+wait_time = 0.1
+autostart = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="RecalculationTimer" to="." method="_on_recalculation_timer_timeout"]

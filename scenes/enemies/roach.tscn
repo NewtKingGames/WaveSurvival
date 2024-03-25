@@ -26,7 +26,7 @@ shape = SubResource("CapsuleShape2D_l0g7x")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="3"]
 avoidance_enabled = true
-radius = 100.0
+radius = 13.5
 debug_enabled = true
 
 [node name="RecalculateTimer" type="Timer" parent="." index="4"]
