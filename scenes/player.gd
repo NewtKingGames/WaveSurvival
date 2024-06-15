@@ -6,6 +6,8 @@ var player_aim_walk_speed: int = 100
 var player_sprint_speed: int = 600
 
 func _process(_delta):
+	# Temporary while we mess with shadows!!!
+	look_at(get_global_mouse_position())
 	# TODO Medium refactor of these nasty booleans
 	# TODO look up animated trees and state machines to see how you can handle this nicer
 	# Eventually cleanup the sprite images themselves to put the player in a consistent posistion

@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var spit_speed: int = 200
+@export var spit_speed: int = 300
 @export var direction: Vector2 = Vector2.UP 
 
 func _process(delta):

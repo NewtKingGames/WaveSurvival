@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://whi8dcpttoor"]
+[gd_scene load_steps=39 format=3 uid="uid://whi8dcpttoor"]
 
 [ext_resource type="PackedScene" uid="uid://b2ebicw4hfqod" path="res://scenes/enemies/enemy.tscn" id="1_oeqje"]
 [ext_resource type="Texture2D" uid="uid://cmw7ekxguve5o" path="res://tutorial-assets/bug/attack/00010.png" id="2_fjj46"]
@@ -32,6 +32,10 @@
 [ext_resource type="Texture2D" uid="uid://e74107ikkfdg" path="res://tutorial-assets/bug/attack/00028.png" id="20_xbno5"]
 [ext_resource type="Texture2D" uid="uid://kw1ophxg0v1i" path="res://tutorial-assets/bug/attack/00029.png" id="21_70kel"]
 [ext_resource type="Texture2D" uid="uid://d34kl8o11jxoe" path="res://tutorial-assets/bug/attack/00030.png" id="22_6vswx"]
+[ext_resource type="AudioStream" uid="uid://bpc0motv5rb75" path="res://audio/whoosh_sound.mp3" id="33_hha2e"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_533u0"]
+light_mode = 2
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lr4l8"]
 animations = [{
@@ -140,12 +144,16 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_etki8"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gojrt"]
+
 [node name="SpitterBug" instance=ExtResource("1_oeqje")]
 motion_mode = 1
 script = ExtResource("2_u4mn7")
 speed = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+modulate = Color(0.392157, 0.403922, 0.4, 1)
+material = SubResource("CanvasItemMaterial_533u0")
 rotation = 1.5708
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_lr4l8")
@@ -180,7 +188,22 @@ debug_enabled = true
 wait_time = 0.1
 autostart = true
 
+[node name="DisengageArea" type="Area2D" parent="." index="8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DisengageArea" index="0"]
+scale = Vector2(36.1711, -32.387)
+shape = SubResource("CircleShape2D_gojrt")
+debug_color = Color(2.362e-06, 0.633672, 0.437819, 0.42)
+
+[node name="Node" type="Node" parent="." index="9"]
+
+[node name="SpitNoise" type="AudioStreamPlayer2D" parent="Node" index="0"]
+stream = ExtResource("33_hha2e")
+volume_db = -13.17
+pitch_scale = 1.49
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
 [connection signal="timeout" from="RecalculationTimer" to="." method="_on_recalculation_timer_timeout"]
+[connection signal="body_exited" from="DisengageArea" to="." method="_on_disengage_area_body_exited"]

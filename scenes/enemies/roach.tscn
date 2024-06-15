@@ -15,6 +15,7 @@ script = ExtResource("2_hbylx")
 speed = 100
 
 [node name="Sprite2D" parent="." index="0"]
+modulate = Color(0.300846, 0.210728, 0.134004, 1)
 position = Vector2(-11, 5.96046e-08)
 rotation = -1.5708
 scale = Vector2(1.25, 1.25)
@@ -32,5 +33,7 @@ debug_enabled = true
 [node name="RecalculateTimer" type="Timer" parent="." index="4"]
 wait_time = 0.1
 autostart = true
+
+[node name="HurtNoise" type="AudioStreamPlayer2D" parent="." index="5"]
 
 [connection signal="timeout" from="RecalculateTimer" to="." method="_on_recalculate_timer_timeout"]
