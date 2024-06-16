@@ -43,6 +43,8 @@ func _on_animated_sprite_2d_animation_finished():
 		$Node/SpitNoise.play()
 		var bullet_direction = (Globals.player_position - global_position).normalized()
 		bug_spat.emit($SpitSpawn.global_position, bullet_direction)
+		# Play attack noise
+		$Node/SpitNoise.play()
 		$AnimatedSprite2D.play("Attack")
 
 func hit():

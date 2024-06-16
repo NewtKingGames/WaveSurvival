@@ -2,6 +2,7 @@ extends Node
 
 signal stat_change
 signal weapon_changed(weapon_name: String)
+signal player_damage
 var player_max_health: int = 200
 var player_vulnerable: bool = true
 
@@ -14,6 +15,8 @@ var player_health: int = 200:
 				print("player health now at ")
 				print(player_health)
 				player_health = value
+				# Shake camera
+				player_damage.emit()
 				player_vulnerable = false
 				player_invulnerable_timer()
 				# TODO add some visual/audio indicator

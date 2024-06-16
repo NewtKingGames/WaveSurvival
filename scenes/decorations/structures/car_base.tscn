@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqvefgunysqwb"]
+[gd_scene load_steps=3 format=3 uid="uid://dqvefgunysqwb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgvhg"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q0s7n"]
+polygon = PackedVector2Array(-55.8333, -107.5, 55.8333, -108.333, 56.6667, 109.167, -55.8333, 109.167)
 
 [node name="CarBase" type="StaticBody2D"]
 scale = Vector2(1.2, 1.2)
@@ -13,3 +16,6 @@ scale = Vector2(4, 4)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(-5.64486, 10.9077)
 shape = SubResource("RectangleShape2D_pgvhg")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_q0s7n")

@@ -48,3 +48,4 @@ func _process(_delta):
 
 func hit():
 	Globals.player_health -= 10
+	$Sounds/HurtSound.play()
