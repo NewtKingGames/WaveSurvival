@@ -27,6 +27,8 @@ func shoot(direction: Vector2):
 		bullet_shot.emit(global_position, direction)
 		$"../CharacterAnimatedSprite2D".play("fire")
 		$"../Sounds/GunShotSound".play()
+		$"../Node/PistolShotTimer".start()
+		$"../MuzzleLight/MuzzleAnimations".play("pistol_fire")
 	if Globals.equipped_weapon == "shotgun":
 		print("shotgun shot")
 		if shotgun_ammo > 0:

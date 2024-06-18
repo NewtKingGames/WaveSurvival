@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://e1q7h8ahbcfq"]
+[gd_scene load_steps=27 format=3 uid="uid://e1q7h8ahbcfq"]
 
 [ext_resource type="Texture2D" uid="uid://lvdxbgnkp3iu" path="res://post-apoc-tds/player_body.png" id="1_ky6tw"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_n7ucp"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://c5gpklwoik45m" path="res://brackeys-assets/flashlight.png" id="18_kci2d"]
 [ext_resource type="AudioStream" uid="uid://dpd7fbn8td8dh" path="res://audio/zapsplat_human_male_vocalisation_hit_pain_cough_slight_growl_66498.mp3" id="19_gr0j0"]
 [ext_resource type="AudioStream" uid="uid://bfrjggfb760hd" path="res://audio/lmg_fire01.mp3" id="19_rvta8"]
+[ext_resource type="Texture2D" uid="uid://rup8o4vednm6" path="res://flashlight_reverse.png" id="21_gmr5q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x4nw2"]
 radius = 8.72065
@@ -101,6 +102,43 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="Animation" id="Animation_0ckum"]
+resource_name = "pistol_fire"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_caaw1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_01420"]
+_data = {
+"RESET": SubResource("Animation_caaw1"),
+"pistol_fire": SubResource("Animation_0ckum")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 31
 script = ExtResource("1_n7ucp")
@@ -114,7 +152,7 @@ shape = SubResource("CircleShape2D_x4nw2")
 rotation = 1.5708
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_eer7d")
-animation = &"aim"
+animation = &"fire"
 
 [node name="Gun" type="Node2D" parent="."]
 position = Vector2(46, 19)
@@ -124,15 +162,36 @@ script = ExtResource("11_k7icv")
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="GunShotSound" type="AudioStreamPlayer2D" parent="Sounds"]
+position = Vector2(268, 24)
 stream = ExtResource("19_rvta8")
 
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("19_gr0j0")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="ViewLight" type="PointLight2D" parent="."]
 color = Color(0.982089, 0.986837, 0.992191, 0.862745)
 energy = 0.5
 shadow_enabled = true
 shadow_filter = 1
 texture = ExtResource("18_kci2d")
 texture_scale = 2.0
+
+[node name="Node" type="Node" parent="."]
+
+[node name="PistolShotTimer" type="Timer" parent="Node"]
+wait_time = 0.25
+one_shot = true
+
+[node name="MuzzleLight" type="PointLight2D" parent="."]
+position = Vector2(44, 19)
+color = Color(0.784314, 0.678431, 0.431373, 1)
+energy = 0.0
+texture = ExtResource("21_gmr5q")
+texture_scale = 0.2
+
+[node name="MuzzleAnimations" type="AnimationPlayer" parent="MuzzleLight"]
+libraries = {
+"": SubResource("AnimationLibrary_01420")
+}
+
+[connection signal="timeout" from="Node/PistolShotTimer" to="." method="_on_pistol_shot_timer_timeout"]
