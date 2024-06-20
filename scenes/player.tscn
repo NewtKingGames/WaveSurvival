@@ -98,9 +98,41 @@ animations = [{
 "texture": ExtResource("10_2bg4e")
 }],
 "loop": true,
+"name": &"sprint",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_tok2l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vx4jm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2q5x4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2bg4e")
+}],
+"loop": true,
 "name": &"walk",
 "speed": 4.0
 }]
+
+[sub_resource type="Animation" id="Animation_caaw1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_0ckum"]
 resource_name = "pistol_fire"
@@ -116,21 +148,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_caaw1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01420"]
@@ -152,7 +169,7 @@ shape = SubResource("CircleShape2D_x4nw2")
 rotation = 1.5708
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_eer7d")
-animation = &"fire"
+animation = &"sprint"
 
 [node name="Gun" type="Node2D" parent="."]
 position = Vector2(46, 19)
@@ -164,6 +181,7 @@ script = ExtResource("11_k7icv")
 [node name="GunShotSound" type="AudioStreamPlayer2D" parent="Sounds"]
 position = Vector2(268, 24)
 stream = ExtResource("19_rvta8")
+volume_db = -10.237
 
 [node name="HurtSound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("19_gr0j0")
