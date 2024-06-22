@@ -9,8 +9,8 @@ var player_sprint_speed: int = 400
 var player_walk_speed: int = 300
 
 
-var aim_reticle = load("res://crosshair007.png")
-var mouse_reticle = load("res://crosshair001.png")
+var aim_reticle = load("res://red_crosshair.png")
+var mouse_reticle = load("res://cursor.png")
 
 func _process(_delta):
 	if is_aiming:
@@ -18,8 +18,6 @@ func _process(_delta):
 	else:
 		Input.set_custom_mouse_cursor(mouse_reticle)
 	look_at(get_global_mouse_position())
-	# TODO look up animated trees and state machines to see how you can handle this nicer
-	# TODO cleanup the sprite images themselves to put the player in a consistent posistion
 
 	# Grab the direction first so we can use it in the else block and the movement section
 	var direction = Input.get_vector("left", "right", "up", "down")
@@ -73,7 +71,6 @@ func _process(_delta):
 func hit():
 	Globals.player_health -= 10
 	$Sounds/HurtSound.play()
-
 
 func _on_pistol_shot_timer_timeout():
 	is_shooting = false

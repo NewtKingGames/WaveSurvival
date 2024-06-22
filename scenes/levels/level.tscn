@@ -479,7 +479,7 @@ visible = false
 navigation_polygon = SubResource("NavigationPolygon_l6gii")
 
 [node name="ModulateDark" type="CanvasModulate" parent="."]
-color = Color(0.282353, 0.266667, 0.262745, 1)
+color = Color(0.572549, 0.584314, 0.592157, 1)
 
 [node name="DamageCanvas" type="CanvasLayer" parent="."]
 

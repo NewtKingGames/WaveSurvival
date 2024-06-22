@@ -17,6 +17,7 @@ var spawn_spitters: int = 1
 var spawned_enemies: int = 0 # This is set in spawn_enemies() function
 var enemies_killed_this_wave: int = 0
 var enemies_killed_total: int = 0
+var wave_number: int = 0
 
 # Notes on enemy spawn system
 # 1. We need to have some initial spawning of enemies 
@@ -40,10 +41,11 @@ func spawn_enemies():
 	spawned_enemies = spawn_roaches + spawn_spitters
 	print("Spawning wave")
 	# Instantiate enemies
-	# TODO Enemies don't move around eachother smoothly, will want some kind of pathfinding or basic method where they avoid eachother
 	for n in spawn_roaches:
 		var selected_spawn: Marker2D = pick_random_spawn()
 		var spawned_roach = roach_enemy.instantiate() as CharacterBody2D
+		# Increase roach speed based off of wave number
+		spawned_roach.speed = spawned_roach.speed * ( 1+ (wave_number * .5))
 		spawned_roach.position = generate_spawn_position(selected_spawn)
 		$Enemies.add_child(spawned_roach)
 	for n in spawn_spitters:
@@ -51,7 +53,6 @@ func spawn_enemies():
 		var spawned_spitter = spitter_enemy.instantiate() as CharacterBody2D
 		spawned_spitter.position = generate_spawn_position(selected_spawn)
 		$Enemies.add_child(spawned_spitter)
-	# Connect enemy signals - TODO optimzation could be done to connect them as we spawn them
 	connect_enemy_signals()
 	
 func generate_spawn_position(point: Marker2D) -> Vector2:
@@ -74,14 +75,14 @@ func check_enemies_alive():
 # function to handle visual effects, score tracking, and general cleanup before the next wave
 # includes a timer between waves
 func end_wave():
+	# Increase wave number
+	wave_number+=1
 	# Reset current number enemies killed
 	enemies_killed_this_wave = 0
 	# Increase the enemies spawning next wave
-		# TODO this could be made to escalate
 		# TODO add some scaling of the enemies using their exported speed variable
-		# TODO could refactor this huge file, but this is just for a jam so...
-	spawn_roaches+=2
-	spawn_spitters+=2
+	spawn_roaches += wave_number*2
+	spawn_spitters += wave_number *2
 	# TODO add some kind of visual indicating the next wave spawn
 	# TODO add some kind of gore cleanup?
 	$Timers/WaveSpawnDelay.start()
@@ -133,4 +134,6 @@ func _on_bug_spat(pos, spit_direction):
 	spit.position = pos
 	spit.rotation = spit_direction.angle()
 	spit.direction = spit_direction
+	# Increase spitter projectile speed based off of wave number
+	spit.spit_speed = spit.spit_speed * (1 + (wave_number * .2))
 	$Bullets.add_child(spit)

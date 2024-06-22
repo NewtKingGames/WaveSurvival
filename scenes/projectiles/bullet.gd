@@ -21,12 +21,7 @@ func _process(delta):
 			# TODO add particle effects?
 	# I ran into a lot of issues with trying to render the bullet shooting off in the distance if we missed,
 	# but found the easiest solution was to just add objects with collisions way off in the distance beyond
-	#f the players view rather than trying to add this logic
-	#else:
-		#print("else block")
-		## It's because of this else block and it's probably due to this set of code running in process
-		#$Line2D.add_point(Vector2.RIGHT*100000)
-		##queue_free()
+	# the players view rather than trying to add this logic
 
 ## Delete the bullet after the timeout
 func _on_bullet_lifetime_timeout():
